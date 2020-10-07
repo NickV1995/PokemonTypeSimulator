@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+    <?php 
+    include 'typesim.php';
+
+    $typesim = new typesim;
+
+    if(isset ($_POST['verzenden'])){
+        
+        $type = $_POST['type'];
+
+        $currenttype = filter_var($type, FILTER_SANITIZE_STRING);
+
+        var_dump($typesim->typesimulator());
+
+        $post_array = $typesim->getPostValues();
+        var_dump($post_array);
+    }
+    ?>
+</head>
+
 <h1> Pokemon type simulator</h1>
 
 <h3>Select the type of your Pokemon and check which types of opponents it can handle best!</h3>
@@ -20,4 +40,7 @@
     </select><br><br>
     <input type="submit" name="verzenden">
 </form>
+
+<p>Your pokemon with type: "<?php echo $currenttype;?>" can beat Pokemon of the <?php $typesim->typesimulator();?> type</p>
+
 </html>
